@@ -1,6 +1,6 @@
 ## DISCLAIMER:  
 
-**This is a repository for the introduction of computer programming. These are notes and assignments that are ONLY intended as inspiration of your works.**
+**This is a repository for the introduction of computer programming. These are notes and assignments that are ONLY intended as inspiration for your works.**
 
 ---
 **Before sourcing, make sure to have distinct modification of the files you intend to use.**  
