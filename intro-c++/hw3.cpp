@@ -1,5 +1,5 @@
 // Date Created: Feb 26, 2026 - 2:11pm
-// Date Updated: Feb 26, 20206 - 11:50pm
+// Date Updated: Feb 27, 20206 - 8:15pm
 // hw3: intro_c++.financial processing program
 
 #include <iostream>
@@ -18,20 +18,23 @@ float converter(float deposited, string currency_type) {
     // actual math
     if (currency_type == "USD") {
         cout << "The VAT for this transaction is " << vat; cout << ". " << vat; cout << " pesos will be deducted to your balance.\n";
+        cout  << fixed << setprecision(2) << "\nPrevious Balance: " << deposited; cout << ". \nCurrent Balance: " << remaining_bal << endl;
         return remaining_bal / PHP_USD;
     } 
     else if (currency_type == "EUR") {
         cout << "The VAT for this transaction is " << vat; cout << ". " << vat; cout << " pesos will be deducted to your balance.\n";
+        cout  << fixed << setprecision(2) << "\nPrevious Balance: " << deposited; cout << ". \nCurrent Balance: " << remaining_bal << endl;
         return remaining_bal / PHP_EUR;
     } 
     else if (currency_type == "JPY") {
         cout << "The VAT for this transaction is " << vat; cout << ". " << vat; cout << " pesos be deducted to your balance.\n";
+        cout  << fixed << setprecision(2) << "\nPrevious Balance: " << deposited; cout << ". \nCurrent Balance: " << remaining_bal << endl;
         return remaining_bal / PHP_JPY;
     } 
     else {
         cout << "Somethiing went wrong. Please try again";
         return 1;
-    } // this shouldn't happen
+    } // this error shouldn't happen
 } //deposited and currency_type are defined here and inside main because they are different functipns
 
 int main(){
@@ -64,13 +67,12 @@ int main(){
     
     // calls the math function above main(). moved the math function outside for simplicity and easier syntax.
     float converted_amount = converter(deposited, currency_type);
-    cout  << fixed << setprecision(2) << "\nConverted amount: " << converted_amount << endl;
         if (currency_type == "USD") {
-            cout << "You now have " << converted_amount; cout << " dollars.\n";
+            cout << "\nYou now have " << converted_amount; cout << " dollars.\n";
         } else if (currency_type == "EUR") {
-            cout << "You now have " << converted_amount; cout << " euros.\n";
+            cout << "\nYou now have " << converted_amount; cout << " euros.\n";
         } else if (currency_type == "JPY") {
-            cout << "You now have " << converted_amount; cout << " yen.\n";
+            cout << "\nYou now have " << converted_amount; cout << " yen.\n";
         } 
 
     return 0;
