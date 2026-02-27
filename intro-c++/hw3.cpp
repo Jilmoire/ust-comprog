@@ -63,7 +63,7 @@ int main(){
 
 
     // after confirmation, we will have the currency_type and confirm_1 variables.
-    if(confirm_1 == 'Y'){cout << "\nConverting PHP to "; cout << currency_type; cout << ". A 12% Value Added Tax will be charged.\nEnter amount: "; cin >> deposited;} else {cout << "Please try again.";} // terminates the program if unconfirmed.
+    if(confirm_1 == 'Y'){cout << "\nConverting PHP to "; cout << currency_type; cout << ". A 12% Value Added Tax will be charged.\nEnter amount: "; cin >> deposited;} else {cout << "Please try again. Program terminated.\n"; return 0;} // terminates the program if unconfirmed.
     
     // calls the math function above main(). moved the math function outside for simplicity and easier syntax.
     float converted_amount = converter(deposited, currency_type);
