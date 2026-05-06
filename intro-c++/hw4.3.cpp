@@ -25,7 +25,7 @@ double RocketBurnCalculator(int EngineSelection, double FinalBurnVelocity, doubl
     return EffectiveDeltaV = FinalBurnVelocity*k;
 }
 
-string DeltaVComparator(double RBCResult){
+string DeltaVComparator(double RBCResult, double Mass){
     double TargetVelocity = 10.9;
 
     // under-speed
@@ -42,7 +42,7 @@ string DeltaVComparator(double RBCResult){
     else{
         cout << "Trajectory Nominal. Artemis II is on course for Lunar Flyby." << endl;
         if(Mass > 25000){
-            cout << "WARNING: Heavy Load detected. Monitor fuel reserves for re-entry."
+            cout << "WARNING: Heavy Load detected. Monitor fuel reserves for re-entry.";
         }
         return "Nominal";
     }
@@ -51,13 +51,13 @@ string DeltaVComparator(double RBCResult){
 int main(){
     int EngineSelection;
     double FinalBurnVelocity, Mass;
-
+    double RBCResult;
     while(true){
         cout << "Enter Engine ID: "; cin >> EngineSelection;
         cout << "Enter Final Burn Velocity: "; cin >> FinalBurnVelocity;
         cout << "Mass of the Spacecraft: "; cin >> Mass;
 
-        double RBCResult = RocketBurnCalculator(EngineSelection, FinalBurnVelocity, Mass);
+        RBCResult = RocketBurnCalculator(EngineSelection, FinalBurnVelocity, Mass);
             if(RBCResult == -1){
                 cout << "No engine with that ID was found. Try Again.";
                 continue;
@@ -65,7 +65,7 @@ int main(){
                 break; // this should exit the loop if RBCResult is not -1
             }
     }
-    DeltaVComparator(RBCResult); // will take the result of calculations and then prints out all thhe information needed to be printed
+    DeltaVComparator(RBCResult, Mass); // will take the result of calculations and then prints out all thhe information needed to be printed
 
     // to do: 
     // instructions, greetings, and decorations
