@@ -30,17 +30,17 @@ string DeltaVComparator(double RBCResult, double Mass){
 
     // under-speed
     if(RBCResult < (TargetVelocity - 0.05)){
-        cout << "Insufficient Velocity. Risk of Earth Re-entry. Secondary Burn Required." << endl;
+        cout << "\nInsufficient Velocity. Risk of Earth Re-entry. Secondary Burn Required." << endl;
         return "under-speed";
     }
     // over-speed
     else if(RBCResult > (TargetVelocity + 0.05)){
-        cout << "Excessive Velocity. Trajectory exceeds Lunar Gravity Well. Course correction required." << endl;
+        cout << "\nExcessive Velocity. Trajectory exceeds Lunar Gravity Well. Course correction required." << endl;
         return "over-speed";
     }
     // within Tolerance
     else{
-        cout << "Trajectory Nominal. Artemis II is on course for Lunar Flyby." << endl;
+        cout << "\nTrajectory Nominal. Artemis II is on course for Lunar Flyby." << endl;
         if(Mass > 25000){
             cout << "WARNING: Heavy Load detected. Monitor fuel reserves for re-entry.";
         }
@@ -52,24 +52,50 @@ int main(){
     int EngineSelection;
     double FinalBurnVelocity, Mass;
     double RBCResult;
+    string MissionStatus;
+
     while(true){
-        cout << "Enter Engine ID: "; cin >> EngineSelection;
-        cout << "Enter Final Burn Velocity: "; cin >> FinalBurnVelocity;
-        cout << "Mass of the Spacecraft: "; cin >> Mass;
+
+        cout << "===============================================================================\n\n";
+        cout << "     ARTEMIS II Lunar Free-Return Trajectory Calculator Simulation Program     \n\n";
+        cout << "===============================================================================\n\n";
+
+        cout << "ENGINES: AJ10-190(1). RCS Thrusters(2). Emergency Abort Motor(3).\n\n";
+
+        cout << " -- Enter Engine ID: "; cin >> EngineSelection;
+        cout << " -- Enter Final Burn Velocity: "; cin >> FinalBurnVelocity;
+        cout << " -- Mass of the Spacecraft: "; cin >> Mass;
+
+        if (FinalBurnVelocity <= 0 || Mass <= 0) {
+            cout << "\n -!- Diagnostic Error: Velocity and Mass must be positive values. Please re-enter data.\n\n";
+            continue; 
+        }
 
         RBCResult = RocketBurnCalculator(EngineSelection, FinalBurnVelocity, Mass);
             if(RBCResult == -1){
-                cout << "No engine with that ID was found. Try Again.";
+                cout << "\n -!- ID Error: No engine with that ID was found. Try Again.\n\n";
                 continue;
             } else {
                 break; // this should exit the loop if RBCResult is not -1
             }
     }
-    DeltaVComparator(RBCResult, Mass); // will take the result of calculations and then prints out all thhe information needed to be printed
 
+
+    MissionStatus = DeltaVComparator(RBCResult, Mass);
+    cout << "\n===============================================================================\n";
+    if (MissionStatus == "Nominal") {
+        cout << "        SIGN-OFF: Godspeed, Orion. See you on the dark side of the Moon.\n";
+    } else if (MissionStatus == "under-speed") {
+        cout << "        SIGN-OFF: Secondary Burn Needed. Ground Control Notified.\n";
+    } else {
+        cout << "        SIGN-OFF: Pilot intervention required. Ground Control Notified.\n";
+    }
+    cout << "===============================================================================\n";
+
+    return 0;
     // to do: 
-    // instructions, greetings, and decorations
-    // encouragement, warning sign offs depending on status of DVC (Optional)
+    // instructions, greetings, and decorations [done]
+    // sign offs depending on status of DVC (optional) [done]
 
     return 0;
 }
